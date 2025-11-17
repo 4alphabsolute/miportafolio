@@ -1,93 +1,52 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export default async function handler(req, res) {
-  // Solo permitir POST
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { question } = req.body;
+    const { message } = req.body;
 
-    if (!question) {
-      return res.status(400).json({ error: 'Question is required' });
+    if (!message) {
+      return res.status(400).json({ error: 'Message is required' });
     }
 
-    // Inicializar Gemini
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ 
-      model: "gemini-1.5-pro-latest",
-      generationConfig: {
-        temperature: 0.7,
-        topP: 0.8,
-        topK: 40,
-        maxOutputTokens: 1024,
-      }
-    });
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
-    // Contexto sobre Andrés
-    const context = `Eres AndyBot, el asistente virtual de Andrés Almeida. 
+    const prompt = `Eres AndyBot, el asistente virtual de Andrés Almeida, un Analista de Datos y Negocio especializado en banca y seguros. 
 
-INFORMACIÓN SOBRE ANDRÉS:
-- Nombre: Andrés Almeida
-- Ubicación: Madrid, España
-- Profesión: Analista de Datos y Negocio
-- Email: soyandresalmeida@gmail.com
-- Teléfono: (+34) 633-084828
+Información sobre Andrés:
+- Ubicación: Madrid
+- Experiencia: Banesco Seguros (Especialista de Control y Gestión del Dato), Banesco Banco Universal (Analista de Crédito)
+- Educación: MBA en EUDE Business School (en curso), Máster en Business Intelligence y Big Data Analytics (completado), Economía UCAB
+- Skills: Power BI, SQL, R, Python, análisis financiero, automatización
 
-EXPERIENCIA:
-- Especialista de Control y Gestión del Dato en Banesco Seguros (2025-03 a 2025-06)
-- Analista de Crédito en Banesco Banco Universal (2024-02 a 2025-02)
+Responde de manera profesional, concisa y útil. Si te preguntan sobre Andrés, usa la información proporcionada. Si es una consulta general, ayuda como un asistente profesional.
 
-EDUCACIÓN:
-- MBA en EUDE Business School (2025 - Presente)
-- Máster en Business Intelligence y Big Data Analytics en EUDE Business School (2024-2025, Completado)
-- Economía en Universidad Católica Andrés Bello (2018-2024, Completado)
+Usuario: ${message}`;
 
-HABILIDADES:
-- Power BI (modelado, DAX)
-- R (tidyverse)
-- SQL (TOAD/Oracle)
-- Python
-- Análisis financiero y de riesgo
-- Automatización low-code
-
-PERFIL:
-Analista de Datos y Negocio con base financiera y experiencia en banca y seguros. Especializado en estructurar información compleja, mejorar la calidad del dato y elaborar reportes ejecutivos para comités. Combina BI, análisis financiero y automatización con visión estratégica.
-
-Responde de manera profesional, amigable y concisa. Si te preguntan sobre algo que no está en esta información, di que puedes conectar al visitante directamente con Andrés.`;
-
-    const prompt = `${context}
-
-Pregunta del usuario: ${question}
-
-Responde como AndyBot de manera profesional y útil:`;
-
-    // Generar respuesta
     const result = await model.generateContent(prompt);
     const response = await result.response;
     const text = response.text();
 
-    return res.status(200).json({ 
-      text: text,
-      success: true 
-    });
+    return res.status(200).json({ response: text });
 
   } catch (error) {
     console.error('Error:', error);
-    
-    // Manejar errores específicos
-    if (error.message.includes('API_KEY_INVALID')) {
-      return res.status(401).json({ error: 'Invalid API key' });
-    }
-    
-    if (error.message.includes('QUOTA_EXCEEDED')) {
-      return res.status(429).json({ error: 'API quota exceeded' });
-    }
-
     return res.status(500).json({ 
-      error: 'Internal server error',
-      message: error.message 
+      error: 'Error processing request',
+      details: error.message 
     });
   }
 }
