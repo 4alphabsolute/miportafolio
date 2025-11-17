@@ -28,7 +28,7 @@ export default function AndyChat({ canvasId }: { canvasId?: string }) {
       
       // Usar Vercel function en producción o localhost en desarrollo
       const apiUrl = process.env.NODE_ENV === 'production' 
-        ? '/api/chat'
+        ? 'https://mi-portafolio.vercel.app/api/chat'
         : `${proxyBase}/api/andybot/${id}`;
       
       const res = await fetch(apiUrl, {
