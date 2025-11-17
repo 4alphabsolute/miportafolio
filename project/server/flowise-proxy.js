@@ -9,14 +9,17 @@ app.use(express.json());
 const FLOWISE_BASE = process.env.FLOWISE_BASE || 'http://localhost:3000';
 const FLOWISE_BEARER = process.env.FLOWISE_BEARER || '';
 
-if (!FLOWISE_BEARER) {
-  console.warn('WARNING: FLOWISE_BEARER not set. The proxy will forward requests without Authorization header.');
-}
+console.log('🚀 Proxy iniciado con configuración:');
+console.log('   FLOWISE_BASE:', FLOWISE_BASE);
+console.log('   FLOWISE_BEARER:', FLOWISE_BEARER ? '✅ Configurado' : '❌ No configurado');
 
 app.post('/api/andybot/:canvasId', async (req, res) => {
   try {
     const { canvasId } = req.params;
     const url = `${FLOWISE_BASE}/api/v1/prediction/${canvasId}`;
+    
+    console.log('📤 Enviando request a Flowise:', url);
+    console.log('📝 Body:', JSON.stringify(req.body, null, 2));
 
     const response = await fetch(url, {
       method: 'POST',
@@ -28,12 +31,22 @@ app.post('/api/andybot/:canvasId', async (req, res) => {
     });
 
     const data = await response.json();
+    console.log('📥 Respuesta de Flowise:', response.status, data);
+    
     res.status(response.status).json(data);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Proxy error' });
+    console.error('❌ Error en proxy:', err);
+    res.status(500).json({ error: 'Proxy error', details: err.message });
   }
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', flowise: FLOWISE_BASE });
+});
+
 const port = process.env.PROXY_PORT || 4000;
-app.listen(port, () => console.log(`Flowise proxy listening on http://localhost:${port}`));
+app.listen(port, () => {
+  console.log(`🔗 Flowise proxy corriendo en http://localhost:${port}`);
+  console.log(`🏥 Health check: http://localhost:${port}/health`);
+});

@@ -15,9 +15,9 @@ export const translations = {
     about: {
       title: 'Sobre mí',
       description:
-        'Economista y Analista de Datos con experiencia en Business Intelligence, especializado en la transformación de datos complejos en insights estratégicos accionables. Dominio de herramientas como Power BI, Tableau, SQL y Python para el análisis financiero y la visualización de datos.',
+        'Analista de Datos y Negocio con base financiera y experiencia en banca y seguros. Especializado en estructurar información compleja, mejorar la calidad del dato y elaborar reportes ejecutivos para comités. Combino Business Intelligence, análisis financiero y automatización con una visión estratégica orientada a la toma de decisiones.',
       education:
-        'Actualmente curso un Máster en Business Intelligence y Big Data en EUDE Business School, complementando mi experiencia práctica con conocimientos avanzados en análisis predictivo y gestión de grandes volúmenes de datos.',
+        'Actualmente curso un MBA en EUDE Business School, complementando mi Máster completado en Business Intelligence y Big Data Analytics. Mi experiencia práctica con Power BI, SQL, R y procesos reproducibles para diagnóstico, integración y limpieza de datos me permite transformar datos complejos en insights accionables para la alta dirección.',
     },
     experience: {
       title: 'Experiencia',
@@ -113,9 +113,9 @@ export const translations = {
     about: {
       title: 'About Me',
       description:
-        'Economist and Data Analyst with experience in Business Intelligence, specialized in transforming complex data into actionable strategic insights. Proficient in tools such as Power BI, Tableau, SQL, and Python for financial analysis and data visualization.',
+        'Data and Business Analyst with financial background and experience in banking and insurance. Specialized in structuring complex information, improving data quality, and developing executive reports for committees. I combine Business Intelligence, financial analysis, and automation with a strategic vision focused on decision-making.',
       education:
-        "Currently pursuing a Master's degree in Business Intelligence and Big Data at EUDE Business School, complementing my practical experience with advanced knowledge in predictive analytics and big data management.",
+        "Currently pursuing an MBA at EUDE Business School, complementing my completed Master's in Business Intelligence and Big Data Analytics. My hands-on experience with Power BI, SQL, R, and reproducible processes for diagnosis, integration, and data cleansing allows me to transform complex data into actionable insights for senior management.",
     },
     experience: {
       title: 'Experience',

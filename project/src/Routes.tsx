@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./Pages/App";
 import Dashboard from "./Pages/Dashboard";
 import Login from "./components/Login";
+import CVConverterPDFFlowise from "./components/CVConverterPDFFlowise";
 import { auth } from "./firebase";
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
@@ -14,6 +15,7 @@ export default function MainRoutes() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/cv-converter" element={<CVConverterPDFFlowise />} />
         <Route
           path="/dashboard"
           element={
