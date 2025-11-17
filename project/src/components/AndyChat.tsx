@@ -34,7 +34,7 @@ export default function AndyChat({ canvasId }: { canvasId?: string }) {
       const res = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question })
+        body: JSON.stringify({ message: question })
       });
 
       if (!res.ok) {
@@ -48,8 +48,10 @@ export default function AndyChat({ canvasId }: { canvasId?: string }) {
       let text: string;
       if (typeof data === 'string') {
         text = data;
+      } else if (data.response) {
+        text = data.response; // Vercel function response
       } else if (data.text) {
-        text = data.text;
+        text = data.text; // Flowise response
       } else if (data.output) {
         text = typeof data.output === 'string' ? data.output : JSON.stringify(data.output);
       } else {
