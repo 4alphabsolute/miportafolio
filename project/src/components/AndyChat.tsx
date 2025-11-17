@@ -1,17 +1,98 @@
 import { useState, useRef, useEffect } from 'react';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { marked } from 'marked';
+import cvProfiles from '../data/cv-profiles.json';
 
 interface Message {
   from: 'user' | 'bot';
   text: string;
 }
 
+interface UserProfile {
+  type: 'recruiter' | 'casual' | 'technical' | 'unknown';
+  detectedProfile?: string;
+  confidence: number;
+}
+
 export default function AndyChat({ canvasId }: { canvasId?: string }) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
-  const id = canvasId || (import.meta.env.VITE_FLOWISE_CANVAS_ID as string) || '';
-  const proxyBase = (import.meta.env.VITE_FLOWISE_PROXY as string) || 'http://localhost:4000';
+  const [userProfile, setUserProfile] = useState<UserProfile>({ type: 'unknown', confidence: 0 });
+  const [conversationContext, setConversationContext] = useState<string[]>([]);
   const [sending, setSending] = useState(false);
+
+  // Detectar tipo de usuario basado en patrones
+  const detectUserType = (text: string): UserProfile => {
+    const lowerText = text.toLowerCase();
+    const { recruiter_patterns, casual_patterns, technical_patterns } = cvProfiles.user_detection;
+    
+    let recruiterScore = 0;
+    let casualScore = 0;
+    let technicalScore = 0;
+    
+    recruiter_patterns.forEach(pattern => {
+      if (lowerText.includes(pattern)) recruiterScore++;
+    });
+    
+    casual_patterns.forEach(pattern => {
+      if (lowerText.includes(pattern)) casualScore++;
+    });
+    
+    technical_patterns.forEach(pattern => {
+      if (lowerText.includes(pattern)) technicalScore++;
+    });
+    
+    const maxScore = Math.max(recruiterScore, casualScore, technicalScore);
+    
+    if (maxScore === 0) return { type: 'unknown', confidence: 0 };
+    
+    if (recruiterScore === maxScore) {
+      return { type: 'recruiter', confidence: recruiterScore / recruiter_patterns.length };
+    } else if (technicalScore === maxScore) {
+      return { type: 'technical', confidence: technicalScore / technical_patterns.length };
+    } else {
+      return { type: 'casual', confidence: casualScore / casual_patterns.length };
+    }
+  };
+
+  // Sugerir perfil CV basado en conversación
+  const suggestCVProfile = (context: string[]): string => {
+    const fullContext = context.join(' ').toLowerCase();
+    
+    Object.entries(cvProfiles.profiles).forEach(([key, profile]) => {
+      const matches = profile.keywords.filter(keyword => 
+        fullContext.includes(keyword.toLowerCase())
+      ).length;
+      
+      if (matches >= 2) return key;
+    });
+    
+    return 'MASTER'; // Default
+  };
+
+  // Generar PDF dinámico
+  const generateDynamicCV = async (profileType: string) => {
+    const profile = cvProfiles.profiles[profileType as keyof typeof cvProfiles.profiles];
+    if (!profile) return;
+    
+    try {
+      const { generateDynamicCV: generatePDF } = await import('../utils/pdfGenerator');
+      generatePDF(profileType as keyof typeof cvProfiles.profiles);
+      
+      // Agregar mensaje del bot confirmando la descarga
+      setMessages(m => [...m, {
+        from: 'bot',
+        text: `¡Perfecto! He generado tu CV personalizado para el perfil "${profile.title}". El archivo PDF se ha descargado automáticamente.\n\n¿Te gustaría que ajuste algo específico o genere otro perfil?`
+      }]);
+    } catch (error) {
+      console.error('Error generando PDF:', error);
+      setMessages(m => [...m, {
+        from: 'bot',
+        text: 'Disculpa, hubo un problema generando el PDF. Como alternativa, puedo enviarte mi información por email o LinkedIn.'
+      }]);
+    }
+  };
 
   const send = async () => {
     console.log('[AndyChat] send() called, input=', input);
@@ -23,46 +104,66 @@ export default function AndyChat({ canvasId }: { canvasId?: string }) {
     setMessages((m) => [...m, { from: 'user', text: question }]);
     setInput('');
 
+    setSending(true);
+    
     try {
-      setSending(true);
-      
-      // Usar Vercel function en producción o localhost en desarrollo
-      const apiUrl = process.env.NODE_ENV === 'production' 
-        ? 'https://mi-portafolio.vercel.app/api/chat'
-        : `${proxyBase}/api/andybot/${id}`;
-      
-      const res = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: question })
-      });
+      const genAI = new GoogleGenerativeAI('AIzaSyDBcGIh9f7ehSZDZyct9e9b4JqaqqmACV0');
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
 
-      if (!res.ok) {
-        const errText = await res.text();
-        throw new Error(`API error ${res.status}: ${errText}`);
+      // Actualizar contexto y perfil de usuario
+      const newContext = [...conversationContext, question].slice(-10); // Últimas 10 interacciones
+      setConversationContext(newContext);
+      
+      const detectedProfile = detectUserType(question);
+      if (detectedProfile.confidence > userProfile.confidence) {
+        setUserProfile(detectedProfile);
       }
-
-      const data = await res.json();
       
-      // Manejar respuesta de Vercel o Flowise
-      let text: string;
-      if (typeof data === 'string') {
-        text = data;
-      } else if (data.response) {
-        text = data.response; // Vercel function response
-      } else if (data.text) {
-        text = data.text; // Flowise response
-      } else if (data.output) {
-        text = typeof data.output === 'string' ? data.output : JSON.stringify(data.output);
-      } else {
-        text = JSON.stringify(data);
+      const suggestedCV = suggestCVProfile(newContext);
+      
+      let contextualPrompt = '';
+      if (userProfile.type === 'recruiter') {
+        contextualPrompt = `\n\nNOTA: Detecté que eres un reclutador. Puedo generar un CV específico para tu búsqueda. ¿Qué perfil necesitas exactamente?`;
+      } else if (userProfile.type === 'technical') {
+        contextualPrompt = `\n\nNOTA: Veo que tienes interés técnico. Puedo profundizar en detalles específicos de implementación.`;
       }
+      
+      const prompt = `Eres Andrés Almeida respondiendo en primera persona como un profesional experimentado.
 
+MI PERFIL COMPLETO:
+- Analista de Datos y Negocio especializado en banca y seguros
+- Banesco Seguros: Automatización reportes actuariales en R, dashboards Power BI
+- Banesco Banco: Análisis riesgo crediticio, EBITDA, flujos de caja
+- MBA EUDE Business School (cursando) + Máster BI completado
+- Skills: Power BI (DAX), R (tidyverse), SQL (Oracle), Python, análisis financiero
+- Madrid, España | soyandresalmeida@gmail.com
+- Web: https://andresalmeida-portafolio.web.app
+
+CONTEXTO DEL USUARIO:
+- Tipo detectado: ${userProfile.type}
+- Perfil sugerido: ${suggestedCV}
+
+RESPONDE COMO YO con ejemplos técnicos específicos. Si es un reclutador, sé más directo sobre resultados y logros. Si preguntan sobre CV o descargas, menciona que puedo generar un CV personalizado.
+
+Si preguntan sobre:
+- Análisis: EBITDA, ratios de liquidez, ROE, análisis de riesgo
+- Power BI: Modelado dimensional, DAX, medidas calculadas, dashboards ejecutivos
+- R: tidyverse, ggplot2, automatización de reportes actuariales
+- Experiencia: Banesco, comités ejecutivos, gobernanza de datos${contextualPrompt}
+
+Pregunta: ${question}`;
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+      
       setMessages((m) => [...m, { from: 'bot', text }]);
-      console.log('[AndyChat] received bot text:', text);
-    } catch (err: any) {
-      console.error('[AndyChat] send error', err);
-      setMessages((m) => [...m, { from: 'bot', text: 'Error en la comunicación con AndyBot.' }]);
+    } catch (error) {
+      console.error('Gemini error:', error);
+      setMessages((m) => [...m, { 
+        from: 'bot', 
+        text: 'Disculpa, tengo problemas técnicos. Como Analista de Datos, puedo contarte que trabajo con Power BI, R y análisis financiero en Banesco. ¿Qué te interesa saber específicamente?' 
+      }]);
     } finally {
       setSending(false);
     }
@@ -122,6 +223,23 @@ export default function AndyChat({ canvasId }: { canvasId?: string }) {
                 <p className="font-medium">¡Hola! Soy AndyBot</p>
                 <p className="text-sm">Pregúntame sobre la experiencia,</p>
                 <p className="text-sm">habilidades y proyectos de Andrés</p>
+                
+                {/* Botones de CV rápido */}
+                <div className="mt-4 space-y-2">
+                  <p className="text-xs font-medium text-gray-600">CV Personalizado:</p>
+                  <div className="flex flex-wrap gap-1 justify-center">
+                    {Object.entries(cvProfiles.profiles).map(([key, profile]) => (
+                      <button
+                        key={key}
+                        onClick={() => generateDynamicCV(key)}
+                        className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full hover:bg-blue-100 transition-colors"
+                        title={profile.description}
+                      >
+                        {profile.title.split(' ')[0]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
             {messages.map((m, i) => (
@@ -131,7 +249,35 @@ export default function AndyChat({ canvasId }: { canvasId?: string }) {
                     ? 'bg-[#0A66C2] text-white rounded-br-md' 
                     : 'bg-white text-gray-800 rounded-bl-md border'
                 }`}>
-                  <p className="text-sm leading-relaxed">{m.text}</p>
+                  <div 
+                    className={`text-sm leading-relaxed prose prose-sm max-w-none ${
+                      m.from === 'user' ? 'prose-invert' : 'prose-gray'
+                    }`}
+                    dangerouslySetInnerHTML={{ 
+                      __html: marked(m.text, { 
+                        breaks: true,
+                        gfm: true 
+                      }) 
+                    }}
+                  />
+                  
+                  {/* Mostrar botón de CV si el bot sugiere descarga */}
+                  {m.from === 'bot' && (m.text.toLowerCase().includes('cv') || m.text.toLowerCase().includes('currículum')) && (
+                    <div className="mt-2 pt-2 border-t border-gray-100">
+                      <p className="text-xs text-gray-500 mb-1">Generar CV personalizado:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {Object.entries(cvProfiles.profiles).slice(0, 3).map(([key, profile]) => (
+                          <button
+                            key={key}
+                            onClick={() => generateDynamicCV(key)}
+                            className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded hover:bg-blue-100 transition-colors"
+                          >
+                            {key}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   <div className={`text-xs mt-1 opacity-70 ${
                     m.from === 'user' ? 'text-blue-100' : 'text-gray-500'
                   }`}>
