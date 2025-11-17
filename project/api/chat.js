@@ -1,8 +1,15 @@
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 module.exports = async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', 'https://andresalmeida-portafolio.web.app');
+  // Enable CORS for multiple origins
+  const allowedOrigins = [
+    'https://andresalmeida-portafolio.web.app',
+    'https://miportafolio-bcjij9yn4-andres-almeidas-projects-90fc8d9c.vercel.app'
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
