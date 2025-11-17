@@ -1,4 +1,6 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "functions": {
     "api/chat.js": {
       "runtime": "nodejs18.x"
@@ -6,5 +8,11 @@
   },
   "env": {
     "GEMINI_API_KEY": "@gemini-api-key"
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
