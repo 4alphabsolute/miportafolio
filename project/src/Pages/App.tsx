@@ -2,20 +2,19 @@ import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import About from '../components/About';
-import { Certificaciones } from "../components/Certificaciones";
-import Experience from '../components/Experience';
-import Projects from '../components/Projects';
-import Contact from '../components/Contact';
+import CertificationsSection from '../components/CertificationsSection';
+import ExperienceSection from '../components/ExperienceSection';
+import ProjectsSection from '../components/ProjectsSection';
+import BlogSection from '../components/BlogSection';
+
+import UnifiedContactSection from '../components/UnifiedContactSection';
 import Footer from '../components/Footer';
 import CookieBanner from '../components/CookieBanner';
 import AndyChat from '../components/AndyChat';
 import { translations } from '../translations';
-import Dashboard from '../Pages/Dashboard';
+
 
 function App() {
-  const isDashboard = window.location.pathname === '/dashboard';
-
-  if (isDashboard) return <Dashboard />;
 
   const [language, setLanguage] = useState<'es' | 'en'>('es');
 
@@ -58,13 +57,14 @@ function App() {
       <Navbar t={t} language={language} toggleLanguage={toggleLanguage} />
       <Hero t={t} language={language} />
       <About t={t} />
-      <Certificaciones t={t} />
-      <Experience t={t} />
-      <Projects t={t} />
-      <Contact t={t} />
+      <CertificationsSection language={language} />
+      <ExperienceSection t={t} language={language} />
+      <ProjectsSection t={t} language={language} />
+      <BlogSection />
+      <UnifiedContactSection language={language} />
       <Footer t={t} />
-  <AndyChat />
-  <CookieBanner t={t} />
+      <AndyChat />
+      <CookieBanner t={t} />
     </div>
   );
 }

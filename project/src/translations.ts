@@ -20,7 +20,11 @@ export const translations = {
         'Actualmente curso un MBA en EUDE Business School, complementando mi Máster completado en Business Intelligence y Big Data Analytics. Mi experiencia práctica con Power BI, SQL, R y procesos reproducibles para diagnóstico, integración y limpieza de datos me permite transformar datos complejos en insights accionables para la alta dirección.',
     },
     experience: {
-      title: 'Experiencia',
+      title: 'Experiencia Profesional',
+      subtitle: 'Trayectoria profesional en análisis de datos y sector financiero',
+      loading: 'Cargando experiencia...',
+      noData: 'No hay experiencia disponible',
+      technologies: 'Tecnologías',
       job1: {
         title: 'Analista de Datos',
         company: 'Banesco Seguros',
@@ -38,7 +42,19 @@ export const translations = {
     },
     projects: {
       title: 'Proyectos',
+      subtitle: 'Proyectos desarrollados y en curso',
+      loading: 'Cargando proyectos...',
+      noData: 'No hay proyectos disponibles',
+      completed: 'Completado',
+      inProgress: 'En Progreso',
+      planned: 'Planeado',
+      viewLive: 'Ver Proyecto',
       comingSoon: 'Próximamente',
+      cta: {
+        title: '¿Tienes un proyecto en mente?',
+        subtitle: 'Conversemos sobre cómo puedo ayudarte a llevarlo a cabo',
+        button: 'Contactar'
+      }
     },
     contact: {
       title: 'Contacto',
@@ -118,7 +134,11 @@ export const translations = {
         "Currently pursuing an MBA at EUDE Business School, complementing my completed Master's in Business Intelligence and Big Data Analytics. My hands-on experience with Power BI, SQL, R, and reproducible processes for diagnosis, integration, and data cleansing allows me to transform complex data into actionable insights for senior management.",
     },
     experience: {
-      title: 'Experience',
+      title: 'Professional Experience',
+      subtitle: 'Professional career in data analysis and financial sector',
+      loading: 'Loading experience...',
+      noData: 'No experience available',
+      technologies: 'Technologies',
       job1: {
         title: 'Data Analyst',
         company: 'Banesco Seguros',
@@ -136,7 +156,19 @@ export const translations = {
     },
     projects: {
       title: 'Projects',
+      subtitle: 'Developed and ongoing projects',
+      loading: 'Loading projects...',
+      noData: 'No projects available',
+      completed: 'Completed',
+      inProgress: 'In Progress',
+      planned: 'Planned',
+      viewLive: 'View Project',
       comingSoon: 'Coming Soon',
+      cta: {
+        title: 'Have a project in mind?',
+        subtitle: 'Let\'s talk about how I can help you make it happen',
+        button: 'Contact'
+      }
     },
     contact: {
       title: 'Contact',

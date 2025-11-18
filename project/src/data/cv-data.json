@@ -12,8 +12,8 @@
       "id": 1,
       "company": "Banesco Seguros",
       "position": "Especialista de Control y Gestión del Dato",
-      "startDate": "2025-03",
-      "endDate": "2025-06",
+      "startDate": "2025",
+      "endDate": "2025",
       "description": "Automatización de reportes actuariales y financieros en R, mejorando consistencia y tiempos de entrega. Desarrollo de dashboards estratégicos en Power BI integrando costos, ventas y reservas. Diagnóstico de fallas estructurales en la arquitectura de datos y propuestas de mejora de gobernanza. Estandarización de definiciones y criterios analíticos entre áreas actuariales y gerenciales.",
       "technologies": ["R", "Power BI"]
     },
@@ -21,8 +21,8 @@
       "id": 2,
       "company": "Banesco Banco Universal",
       "position": "Analista de Crédito",
-      "startDate": "2024-02",
-      "endDate": "2025-02",
+      "startDate": "2024",
+      "endDate": "2025",
       "description": "Análisis de riesgo crediticio con flujos de caja, métricas financieras y reclasificación contable. Elaboración y defensa técnica de expedientes ante el Comité Ejecutivo de Crédito. Integración del análisis técnico con necesidades comerciales y contexto macroeconómico. Evaluación de clientes corporativos usando EBITDA, liquidez, rotaciones y flujo operativo.",
       "technologies": []
     }
@@ -78,5 +78,42 @@
       "github": "https://github.com/usuario/miportafolio"
     }
   ],
-  "certifications": []
+  "certifications": [
+    {
+      "id": 1,
+      "name": "MBA",
+      "issuer": "EUDE Business School",
+      "date": "2025 - En curso",
+      "description": "Programa de Maestría en Administración de Empresas con enfoque en gestión estratégica y liderazgo empresarial",
+      "credentialId": "MBA-2025",
+      "url": ""
+    },
+    {
+      "id": 2,
+      "name": "Máster en Business Intelligence y Big Data Analytics",
+      "issuer": "EUDE Business School",
+      "date": "2024-2025",
+      "description": "Programa completo en BI, análisis de datos, Power BI, SQL y herramientas de Big Data para la toma de decisiones empresariales",
+      "credentialId": "MBI-2024",
+      "url": ""
+    },
+    {
+      "id": 3,
+      "name": "Licenciatura en Economía",
+      "issuer": "Universidad Católica Andrés Bello (UCAB)",
+      "date": "2018-2024",
+      "description": "Formación sólida en economía con enfoque en análisis cuantitativo, finanzas y políticas públicas",
+      "credentialId": "ECO-2024",
+      "url": ""
+    },
+    {
+      "id": 4,
+      "name": "Ingeniería Informática (5 semestres)",
+      "issuer": "Universidad Católica Andrés Bello (UCAB)",
+      "date": "2015-2018",
+      "description": "Fundamentos de programación, estructuras de datos y pensamiento lógico aplicados a la analítica",
+      "credentialId": "ING-2018",
+      "url": ""
+    }
+  ]
 }

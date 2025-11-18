@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Permitir lectura pública de certificados, proyectos y experiencias
+    match /{collection}/{document} {
+      allow read: if collection in ['certificates', 'projects', 'experiences'];
+      allow write: if request.auth != null && collection in ['certificates', 'projects', 'experiences', 'bot_interactions', 'system'];
+    }
+    
+    // Permitir lectura y escritura de mensajes de contacto
+    match /mensajes/{document} {
+      allow read, write: if true;
+    }
+    
+    // Permitir interacciones del bot (solo escritura pública, lectura autenticada)
+    match /bot_interactions/{document} {
+      allow create: if true;
+      allow read: if request.auth != null;
+    }
+    
+    // Sistema solo para usuarios autenticados
+    match /system/{document} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

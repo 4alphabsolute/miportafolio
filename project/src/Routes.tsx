@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./Pages/App";
-import Dashboard from "./Pages/Dashboard";
-import Login from "./components/Login";
+import ProfessionalDashboard from "./Pages/ProfessionalDashboard";
+import Admin from "./Pages/Admin";
+import SimpleLogin from "./components/SimpleLogin";
 import CVConverterPDFFlowise from "./components/CVConverterPDFFlowise";
-import { auth } from "./firebase";
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
-  return auth.currentUser ? children : <Navigate to="/login" />;
+  const isAuth = localStorage.getItem('adminAuth') === 'true';
+  return isAuth ? children : <Navigate to="/login" />;
 }
 
 export default function MainRoutes() {
@@ -14,16 +15,17 @@ export default function MainRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<SimpleLogin />} />
         <Route path="/cv-converter" element={<CVConverterPDFFlowise />} />
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <ProfessionalDashboard />
             </PrivateRoute>
           }
         />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
