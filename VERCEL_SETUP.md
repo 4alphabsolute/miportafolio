@@ -27,12 +27,14 @@ git push -u origin main
 En Vercel Dashboard → Settings → Environment Variables:
 
 ```
-VITE_FIREBASE_API_KEY=tu_api_key
-VITE_FIREBASE_AUTH_DOMAIN=tu_project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=tu_project_id
-VITE_FIREBASE_STORAGE_BUCKET=tu_project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
-VITE_FIREBASE_APP_ID=1:123456789:web:abcdef
+VITE_FIREBASE_API_KEY=your_firebase_api_key_here
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+VITE_GEMINI_API_KEY=your_gemini_api_key_here
+VITE_ADMIN_PASSWORD=your_secure_password
 ```
 
 ### 4. **Configuración Firebase**
