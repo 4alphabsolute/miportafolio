@@ -160,9 +160,9 @@ Este es un proyecto personal de portfolio, pero las sugerencias y feedback son b
 ## 📧 Contacto
 
 **Andrés Almeida** - Analista de Datos & Desarrollador Web
-- 📧 Email: [tu-email@ejemplo.com]
-- 💼 LinkedIn: [tu-linkedin]
-- 🌐 Portfolio: [tu-dominio.com]
+- 📧 Email: [soyandresalmeida@gmail.com]
+- 💼 LinkedIn: [[Https](https://www.linkedin.com/in/soyandresalmeida/)]
+- 🌐 Portfolio: [www,soyandresalmeida.com]
 
 ---
 
