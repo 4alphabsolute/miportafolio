@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { collection, getDocs, query, orderBy, limit, where } from 'firebase/firestore';
-import { db } from '../firebase';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { db, auth } from '../firebase';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
+import { getPageVisitCount } from '../utils/dataManager';
 
 interface Mensaje {
   nombre: string;
@@ -10,12 +11,14 @@ interface Mensaje {
   empresa?: string;
   tipoProyecto?: string;
   idioma?: string;
+  language?: string;
   fecha: { seconds: number };
 }
 
 interface BotInteraction {
   userType: string;
   language: string;
+  idioma?: string;
   messageCount: number;
   timestamp: { seconds: number };
 }
@@ -26,9 +29,10 @@ export default function ProfessionalDashboard() {
   const [user, setUser] = useState<any>(null);
   const [mensajes, setMensajes] = useState<Mensaje[]>([]);
   const [botInteractions, setBotInteractions] = useState<BotInteraction[]>([]);
+  const [pageVisits, setPageVisits] = useState(0);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('7d');
-  
+
   const [metrics, setMetrics] = useState({
     totalMessages: 0,
     todayMessages: 0,
@@ -41,11 +45,12 @@ export default function ProfessionalDashboard() {
   });
 
   useEffect(() => {
-    const isAuth = localStorage.getItem('adminAuth') === 'true';
-    if (isAuth) {
-      setUser({ displayName: 'Andrés Almeida', email: 'soyandresalmeida@gmail.com' });
-    } else {
-      window.location.href = '/login';
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      setUser({
+        displayName: currentUser.displayName || 'Admin',
+        email: currentUser.email
+      });
     }
   }, []);
 
@@ -84,6 +89,10 @@ export default function ProfessionalDashboard() {
 
       // Calcular métricas
       calculateMetrics(mensajesData, botData, startDate);
+
+      // Visitas a la página
+      const visits = await getPageVisitCount();
+      setPageVisits(visits);
     } catch (error) {
       console.error('Error fetching analytics:', error);
     } finally {
@@ -92,25 +101,25 @@ export default function ProfessionalDashboard() {
   };
 
   const calculateMetrics = (messages: Mensaje[], interactions: BotInteraction[], startDate: Date) => {
-    const filteredMessages = messages.filter(m => 
+    const filteredMessages = messages.filter(m =>
       new Date(m.fecha.seconds * 1000) >= startDate
     );
-    const filteredInteractions = interactions.filter(i => 
+    const filteredInteractions = interactions.filter(i =>
       new Date(i.timestamp.seconds * 1000) >= startDate
     );
 
     // Mensajes de hoy
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const todayMessages = messages.filter(m => 
+    const todayMessages = messages.filter(m =>
       new Date(m.fecha.seconds * 1000) >= today
     ).length;
 
     // Contactos de reclutadores (estimado por palabras clave)
     const recruiterKeywords = ['reclutador', 'recruiter', 'hiring', 'job', 'position', 'vacancy', 'empresa', 'company'];
-    const recruiterContacts = filteredMessages.filter(m => 
-      recruiterKeywords.some(keyword => 
-        m.mensaje.toLowerCase().includes(keyword) || 
+    const recruiterContacts = filteredMessages.filter(m =>
+      recruiterKeywords.some(keyword =>
+        m.mensaje.toLowerCase().includes(keyword) ||
         (m.empresa && m.empresa.length > 0)
       )
     ).length;
@@ -180,8 +189,8 @@ export default function ProfessionalDashboard() {
     });
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminAuth');
+  const handleLogout = async () => {
+    await auth.signOut();
     window.location.href = '/login';
   };
 
@@ -226,11 +235,10 @@ export default function ProfessionalDashboard() {
                   <button
                     key={range.value}
                     onClick={() => setTimeRange(range.value)}
-                    className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
-                      timeRange === range.value 
-                        ? 'bg-white text-blue-600 shadow-sm' 
-                        : 'text-gray-600 hover:text-gray-900'
-                    }`}
+                    className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${timeRange === range.value
+                      ? 'bg-white text-blue-600 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                      }`}
                   >
                     {range.label}
                   </button>
@@ -303,6 +311,21 @@ export default function ProfessionalDashboard() {
             </div>
           </div>
 
+          <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Visitas a la Web</p>
+                <p className="text-3xl font-bold text-gray-900">{pageVisits}</p>
+                <p className="text-sm text-indigo-600">Visitas totales registradas</p>
+              </div>
+              <div className="p-3 bg-indigo-100 rounded-full">
+                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+            </div>
+          </div>
           <div className="bg-white rounded-xl shadow-sm p-6 border-l-4 border-yellow-500">
             <div className="flex items-center justify-between">
               <div>
@@ -318,86 +341,86 @@ export default function ProfessionalDashboard() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Charts Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-8">
-          {/* Actividad Diaria */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Actividad Diaria</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <AreaChart data={metrics.dailyActivity}>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="messages" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
-                <Area type="monotone" dataKey="interactions" stackId="1" stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-
-          {/* Distribución de Idiomas */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Distribución de Idiomas</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={metrics.languageDistribution}
-                  cx="50%" cy="50%" outerRadius={80}
-                  dataKey="value"
-                  label={({ name, value, percent }) => `${name}: ${value} (${(percent * 100).toFixed(0)}%)`}
-                >
-                  {metrics.languageDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+      {/* Charts Grid */}
+      <div className="grid lg:grid-cols-2 gap-8 mb-8">
+        {/* Actividad Diaria */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Actividad Diaria</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={metrics.dailyActivity}>
+              <XAxis dataKey="date" />
+              <YAxis />
+              <Tooltip />
+              <Area type="monotone" dataKey="messages" stackId="1" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
+              <Area type="monotone" dataKey="interactions" stackId="1" stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* Bottom Grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Tipos de Proyecto */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Tipos de Proyecto Más Solicitados</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={metrics.topProjectTypes} layout="horizontal">
-                <XAxis type="number" />
-                <YAxis dataKey="name" type="category" width={120} />
-                <Tooltip />
-                <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+        {/* Distribución de Idiomas */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Distribución de Idiomas</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={metrics.languageDistribution}
+                cx="50%" cy="50%" outerRadius={80}
+                dataKey="value"
+                label={({ name, value, percent }: any) => `${name}: ${value} (${(percent * 100).toFixed(0)}%)`}
+              >
+                {metrics.languageDistribution.map((_, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
 
-          {/* Últimos Contactos */}
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Últimos Contactos</h3>
-            <div className="space-y-4 max-h-80 overflow-y-auto">
-              {mensajes.slice(0, 8).map((m, i) => (
-                <div key={i} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <div className="flex-shrink-0">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-blue-600 font-medium text-sm">
-                        {m.nombre.charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-gray-900">{m.nombre}</p>
-                      <span className="text-xs text-gray-500">
-                        {new Date(m.fecha.seconds * 1000).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <p className="text-xs text-gray-600">{m.email}</p>
-                    {m.empresa && <p className="text-xs text-blue-600">{m.empresa}</p>}
-                    <p className="text-sm text-gray-800 mt-1 line-clamp-2">{m.mensaje}</p>
+      {/* Bottom Grid */}
+      <div className="grid lg:grid-cols-2 gap-8">
+        {/* Tipos de Proyecto */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Tipos de Proyecto Más Solicitados</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={metrics.topProjectTypes} layout="horizontal">
+              <XAxis type="number" />
+              <YAxis dataKey="name" type="category" width={120} />
+              <Tooltip />
+              <Bar dataKey="count" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Últimos Contactos */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Últimos Contactos</h3>
+          <div className="space-y-4 max-h-80 overflow-y-auto">
+            {mensajes.slice(0, 8).map((m, i) => (
+              <div key={i} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                <div className="flex-shrink-0">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-blue-600 font-medium text-sm">
+                      {m.nombre.charAt(0).toUpperCase()}
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-900">{m.nombre}</p>
+                    <span className="text-xs text-gray-500">
+                      {new Date(m.fecha.seconds * 1000).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-600">{m.email}</p>
+                  {m.empresa && <p className="text-xs text-blue-600">{m.empresa}</p>}
+                  <p className="text-sm text-gray-800 mt-1 line-clamp-2">{m.mensaje}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
