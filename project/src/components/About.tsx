@@ -1,4 +1,4 @@
-import { BarChart3, Database, TrendingUp, Code } from 'lucide-react';
+import { BarChart3, Database, TrendingUp, Code, Cpu, Layout } from 'lucide-react';
 
 interface AboutProps {
   t: any;
@@ -9,11 +9,13 @@ export default function About({ t }: AboutProps) {
     { icon: <BarChart3 size={32} />, name: 'Power BI' },
     { icon: <Database size={32} />, name: 'SQL' },
     { icon: <TrendingUp size={32} />, name: 'Tableau' },
-    { icon: <Code size={32} />, name: 'Python & R' }
+    { icon: <Code size={32} />, name: 'Python & R' },
+    { icon: <Cpu size={32} />, name: 'AI & Architect' },
+    { icon: <Layout size={32} />, name: 'Project Management' }
   ];
 
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">
           {t.about.title}
@@ -29,11 +31,11 @@ export default function About({ t }: AboutProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition transform hover:scale-105"
+                className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-blue-100/50 rounded-xl shadow-sm hover:shadow-md hover:from-blue-100 hover:to-blue-200/50 transition-all duration-300 transform hover:scale-105"
               >
                 <div className="text-[#0A66C2] mb-3">
                   {skill.icon}

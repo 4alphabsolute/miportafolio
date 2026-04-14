@@ -5,7 +5,7 @@
     "email": "soyandresalmeida@gmail.com",
     "phone": "(+34) 633-084828",
     "location": "Madrid",
-    "summary": "Analista de Datos y Negocio con base financiera y experiencia en banca y seguros. Especializado en estructurar información compleja, mejorar la calidad del dato y elaborar reportes ejecutivos para comités. Combino BI, análisis financiero y automatización con una visión estratégica orientada a la toma de decisiones. Experiencia con Power BI, SQL, R y procesos reproducibles para diagnóstico, integración y limpieza de datos."
+    "summary": "En un mundo de especialistas, yo elijo ser el puente. Como Economista, entiendo el ROI y la estrategia. Como Analista, encuentro la verdad en los datos. Y como Developer, construyo las herramientas para solucionar los problemas que encuentro. Mi enfoque es híbrido: combino la visión de negocio con la capacidad técnica (Python, SQL, React) para crear soluciones que generen valor real."
   },
   "experience": [
     {
@@ -15,7 +15,10 @@
       "startDate": "2025",
       "endDate": "2025",
       "description": "Automatización de reportes actuariales y financieros en R, mejorando consistencia y tiempos de entrega. Desarrollo de dashboards estratégicos en Power BI integrando costos, ventas y reservas. Diagnóstico de fallas estructurales en la arquitectura de datos y propuestas de mejora de gobernanza. Estandarización de definiciones y criterios analíticos entre áreas actuariales y gerenciales.",
-      "technologies": ["R", "Power BI"]
+      "technologies": [
+        "R",
+        "Power BI"
+      ]
     },
     {
       "id": 2,
@@ -63,19 +66,53 @@
   ],
   "skills": {
     "frontend": [],
-    "backend": ["R (tidyverse)", "Python"],
-    "database": ["SQL (TOAD/Oracle)"],
+    "backend": [
+      "R (tidyverse)",
+      "Python"
+    ],
+    "database": [
+      "SQL (TOAD/Oracle)"
+    ],
     "cloud": [],
-    "tools": ["Power BI (modelado, DAX)", "Análisis de flujos de caja", "Análisis de estados financieros", "Análisis de riesgo", "Automatización low-code"]
+    "tools": [
+      "Power BI (modelado, DAX)",
+      "Análisis de flujos de caja y estados financieros",
+      "Project Management (Gantt, Plan Maestro)",
+      "BIM & Revit (Contexto de gestión de obras)",
+      "Automatización low-code & AI Workflows",
+      "Spec Driven Development (SDD)",
+      "Model Context Protocol (MCP)",
+      "Cursor, Kiro, Antigravity",
+      "Cloud APIs & Supabase Integration"
+    ]
   },
   "projects": [
     {
       "id": 1,
-      "name": "Mi Portafolio",
-      "description": "Portafolio personal con chatbot integrado usando Flowise y Gemini",
-      "technologies": ["React", "TypeScript", "Tailwind", "Firebase", "Flowise"],
-      "url": "https://andresalmeida-portafolio.web.app",
-      "github": "https://github.com/usuario/miportafolio"
+      "name": "Ecosistema ALTAIR & CRM",
+      "description": "Plataforma integral (CRM + Portfolio) desarrollada desde cero con React y Firebase. Actúa como mi propio 'Salesforce' personal, gestionando leads, analizando tráfico en tiempo real con IA (Gemini) y automatizando el seguimiento de oportunidades comerciales.",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Gemini API",
+        "Supabase",
+        "CRM"
+      ],
+      "url": "https://soyandresalmeida.com",
+      "github": "https://github.com/4alphabsolute/portafolio-admin"
+    },
+    {
+      "id": 2,
+      "name": "Analítica de Mercados",
+      "description": "Sistema de inteligencia de mercado que monitorea indicadores macroeconómicos y financieros en tiempo real. Utiliza scripts en Python y PineScript para detectar tendencias y generar alertas estratégicas para la toma de decisiones de inversión.",
+      "technologies": [
+        "PineScript",
+        "TradingView",
+        "Python",
+        "Finance"
+      ],
+      "url": "",
+      "github": ""
     }
   ],
   "certifications": [

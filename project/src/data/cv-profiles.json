@@ -1,49 +1,301 @@
 {
+  "contact": {
+    "name": "Andrés Almeida",
+    "phone": "(+34) 633-084828",
+    "location": "Madrid, España",
+    "email": "soyandresalmeida@gmail.com",
+    "linkedin": "https://linkedin.com/in/soyandresalmeida",
+    "website": "https://soyandresalmeida.com"
+  },
   "profiles": {
-    "MASTER": {
-      "title": "Analista Híbrido de Datos y Negocio",
-      "description": "Analista híbrido de Datos y Negocio con base financiera y experiencia en banca y seguros. Transformo datos fragmentados en información confiable para comités ejecutivos mediante BI, análisis financiero y automatización. Manejo de Power BI, SQL, R y herramientas low-code para reportería, validación del dato y prototipado analítico.",
-      "keywords": ["business intelligence", "datos", "análisis", "ejecutivo", "reportería"],
-      "skills_focus": ["Power BI", "SQL", "R", "Análisis Financiero", "Automatización"]
-    },
-    "BI": {
-      "title": "Analista de Business Intelligence",
-      "description": "Analista de Business Intelligence con experiencia en modelado de datos, reportería ejecutiva, dashboards estratégicos y definición de KPIs. Capacidad para estructurar información dispersa, mejorar calidad del dato y automatizar procesos con SQL, R y Power BI.",
-      "keywords": ["business intelligence", "power bi", "dashboards", "kpis", "reportería"],
-      "skills_focus": ["Power BI", "DAX", "SQL", "Dashboards", "KPIs"]
-    },
     "DATA": {
-      "title": "Analista de Datos",
-      "description": "Analista de Datos orientado a limpieza, validación, transformación, integración y análisis de datasets complejos. Manejo de SQL, R (tidyverse), automatización low-code e IA aplicada para convertir datos crudos en insights claros.",
-      "keywords": ["datos", "sql", "python", "análisis", "machine learning"],
-      "skills_focus": ["SQL", "R", "Python", "Data Cleaning", "Analytics"]
+      "title": "Data Analyst Specialist",
+      "title_es": "Analista de Datos Specialist",
+      "description": "Analista de Datos con sólida base en Economía. Especialista en transformar datos complejos en decisiones de negocio mediante el ciclo completo del dato: ETL, limpieza, modelado y visualización. Experto en SQL, Power BI y R. Combino rigor analítico con la capacidad de comunicar insights claros a stakeholders no técnicos.",
+      "description_en": "Data Analyst with a solid background in Economics. Specialist in transforming complex data into business decisions through the complete data cycle: ETL, cleaning, modeling, and visualization. Expert in SQL, Power BI, and R. I combine analytical rigor with the ability to communicate clear insights to non-technical stakeholders.",
+      "keywords": [
+        "sql",
+        "power bi",
+        "r",
+        "etl",
+        "tableau",
+        "analytics",
+        "data",
+        "bi",
+        "visualización"
+      ],
+      "skills_focus": [
+        "SQL",
+        "Power BI",
+        "R",
+        "ETL",
+        "Data Modeling"
+      ],
+      "skills_soft": [
+        "Pensamiento Crítico",
+        "Comunicación Analítica",
+        "Resolución de Problemas"
+      ],
+      "skills_soft_en": [
+        "Critical Thinking",
+        "Analytical Communication",
+        "Problem Solving"
+      ]
     },
-    "FINANZAS": {
-      "title": "Analista Financiero",
-      "description": "Analista Financiero con especialización en riesgo crediticio, análisis de estados financieros, flujos de caja y KPIs corporativos. Integración de BI (Power BI, SQL, R) para preparar reportes estratégicos y análisis técnicos para comités ejecutivos.",
-      "keywords": ["finanzas", "riesgo", "crédito", "análisis financiero", "banca"],
-      "skills_focus": ["Análisis Financiero", "Riesgo Crediticio", "Power BI", "KPIs Financieros"]
+    "FINTECH": {
+      "title": "Fintech Strategy Consultant",
+      "title_es": "Consultor de Estrategia Fintech",
+      "description": "Economista y MBA especializado en Transformación Digital. Fusiono la visión estratégica financiera con la ejecución técnica. Experto en optimizar procesos mediante metodologías Agile y Design Thinking. Enfoque en maximizar el ROI mediante la automatización inteligente y la gestión de productos innovadores.",
+      "description_en": "Economist and MBA specialized in Digital Transformation. I merge financial strategic vision with technical execution. Expert in optimizing processes through Agile and Design Thinking methodologies. Focus on maximizing ROI through intelligent automation and innovative product management.",
+      "keywords": [
+        "agile",
+        "strategy",
+        "roi",
+        "product owner",
+        "fintech",
+        "digital transformation",
+        "scrum"
+      ],
+      "skills_focus": [
+        "Metodologías Agile",
+        "Product Management",
+        "Business Intelligence",
+        "Estrategia"
+      ],
+      "skills_soft": [
+        "Adaptabilidad al Cambio",
+        "Liderazgo Transversal",
+        "Resiliencia"
+      ],
+      "skills_soft_en": [
+        "Adaptability to Change",
+        "Cross-functional Leadership",
+        "Resilience"
+      ]
     },
-    "CONSULTOR": {
-      "title": "Consultor de Soluciones Digitales",
-      "description": "Consultor de soluciones digitales orientado a resultados. Ayudo a profesionales, emprendedores y pequeñas empresas a transformar ideas en herramientas reales mediante IA generativa, automatización low-code y análisis de datos. Desarrollo asistentes conversacionales, dashboards ejecutivos, flujos automáticos y webs funcionales sin necesidad de infraestructura compleja.\n\nExperiencia combinada en economía, BI y trading (criptoactivos, futuros, indicadores técnicos y metodologías como Wyckoff). Capacidad para interpretar datos desde una perspectiva estratégica y convertirlos en decisiones accionables. Si necesitas claridad, automatización o una solución rápida y funcional, yo te la construyo.",
-      "keywords": ["consultoría", "ia", "automatización", "soluciones digitales", "chatbots"],
-      "skills_focus": ["IA Generativa", "Automatización", "Chatbots", "Trading", "Soluciones Digitales"]
+    "BUILDER": {
+      "title": "AI Solutions Developer & Business Architect",
+      "title_es": "Arquitecto de Soluciones IA y Negocio",
+      "description": "Especialista en el desarrollo de sistemas inteligentes mediante Spec Driven Development (SDD). Experto en orquestación de workflows agénticos y conectividad vía MCP para automatizar procesos complejos. Combino la visión estratégica de un MBA con la ejecución técnica en arquitecturas modernas (React, Supabase, Cloud APIs) para crear herramientas que generan eficiencia operativa real.",
+      "description_en": "Specialist in developing intelligent systems through Spec Driven Development (SDD). Expert in agentic workflow orchestration and MCP connectivity to automate complex processes. I combine the strategic vision of an MBA with technical execution in modern architectures (React, Supabase, Cloud APIs) to create tools that generate real operational efficiency.",
+      "keywords": [
+        "react",
+        "gemini",
+        "sdd",
+        "mcp",
+        "ai agents",
+        "workflows",
+        "supabase",
+        "cloud apis",
+        "antigravity",
+        "cursor",
+        "llm orchestration",
+        "automation"
+      ],
+      "skills_focus": [
+        "Spec Driven Development (SDD)",
+        "Model Context Protocol (MCP)",
+        "Agentic Systems",
+        "Supabase & Cloud APIs",
+        "React & TypeScript"
+      ],
+      "skills_soft": [
+        "Aprendizaje Ágil",
+        "Visión Sistémica de Producto",
+        "Innovación Disruptiva"
+      ],
+      "skills_soft_en": [
+        "Agile Learning",
+        "Systemic Product Vision",
+        "Disruptive Innovation"
+      ],
+      "show_engineering": true
+    },
+    "FINANCE": {
+      "title": "Financial & Project Management Analyst",
+      "title_es": "Analista Financiero y de Gestión de Proyectos",
+      "description": "Economista con sólida formación analítica (MBA + Big Data). Especialista en Auditoría, Modelización Financiera y Gestión de Proyectos bajo metodologías de Plan Maestro y Diagramas de Gantt. Capacidad para gestionar flujos de control en sectores complejos (Real Estate/BIM) y asegurar el cumplimiento normativo mediante eficiencia operativa.",
+      "description_en": "Economist with a solid analytical background (MBA + Big Data). Specialist in Audit, Financial Modeling, and Project Management under Master Plan and Gantt Chart methodologies. Ability to manage control flows in complex sectors (Real Estate/BIM) and ensure regulatory compliance through operational efficiency.",
+      "keywords": [
+        "riesgos",
+        "auditoría",
+        "control de gestión",
+        "plan maestro",
+        "gantt",
+        "bim",
+        "backflipping",
+        "modelado financiero",
+        "finanzas"
+      ],
+      "skills_focus": [
+        "Project Management (Gantt, Master Plan)",
+        "Control de Gestión y Auditoría",
+        "Modelado Financiero",
+        "BIM & Revit Awareness"
+      ],
+      "skills_soft": [
+        "Adaptabilidad al Cambio",
+        "Liderazgo Transversal",
+        "Resiliencia"
+      ],
+      "skills_soft_en": [
+        "Adaptability to Change",
+        "Cross-functional Leadership",
+        "Resilience"
+      ]
+    },
+    "SALES": {
+      "title": "Sales & Operations Specialist",
+      "title_es": "Especialista en Ventas y Operaciones",
+      "description": "Economista y MBA con enfoque en Gestión Comercial, Ventas y Operaciones. Especialista en optimizar la experiencia del cliente y los procesos de venta mediante el uso inteligente de datos (CRM y KPIs). Mi visión estratégica me permite entender las tendencias del mercado inmobiliario y las necesidades del usuario final. Combino una fuerte orientación a resultados con empatía y habilidades de negociación.",
+      "description_en": "Economist and MBA with a focus on Commercial Management, Sales, and Operations. Specialist in optimizing customer experience and sales processes through the intelligent use of data (CRM and KPIs). My strategic vision allows me to understand real estate market trends and end-user needs. I combine a strong results orientation with empathy and negotiation skills.",
+      "keywords": [
+        "crm",
+        "real estate",
+        "nps",
+        "b2b",
+        "ventas",
+        "operaciones",
+        "negociación",
+        "comercial"
+      ],
+      "skills_focus": [
+        "CRM Management",
+        "KPIs",
+        "Excel Avanzado",
+        "Real Estate Market"
+      ],
+      "skills_soft": [
+        "Orientación a Resultados",
+        "Negociación y Cierre",
+        "Empatía con el Cliente"
+      ],
+      "skills_soft_en": [
+        "Results Orientation",
+        "Negotiation and Closing",
+        "Customer Empathy"
+      ],
+      "special_experience": "sales"
+    }
+  },
+  "experience_variants": {
+    "default": {
+      "seguros": [
+        "Reducción del 60% en tiempos de carga de datos mediante scripts automatizados (ETL).",
+        "Liderazgo en la transformación digital del área de reportes y gobernanza del dato.",
+        "Diseño de dashboards ejecutivos en Power BI para la toma de decisiones directivas."
+      ],
+      "seguros_en": [
+        "60% reduction in data loading times through automated scripts (ETL).",
+        "Leadership in the digital transformation of the reporting and data governance area.",
+        "Design of executive dashboards in Power BI for management decision making."
+      ],
+      "banco": [
+        "Evaluación de riesgo para cartera mixta: Grandes Corporaciones (B2B) y Microcréditos/PYMES (B2C).",
+        "Análisis de Estados Financieros (B2B) y capacidad de pago masiva (Scoring B2C).",
+        "Defensa técnica de operaciones de crédito ante comités de riesgo y optimización del Time-to-Market."
+      ],
+      "banco_en": [
+        "Risk assessment for mixed portfolio: Large Corporations (B2B) and Microcredits/SMEs (B2C).",
+        "Financial Statement Analysis (B2B) and mass payment capacity (B2C Scoring).",
+        "Technical defense of credit operations before risk committees and Time-to-Market optimization."
+      ]
+    },
+    "sales": {
+      "seguros": [
+        "Gestión integral de cartera de clientes y soporte operativo, asegurando altos índices de satisfacción (NPS).",
+        "Optimización de procesos administrativos de contratación, reduciendo tiempos de respuesta en un 60%.",
+        "Coordinación con departamentos internos para la resolución ágil de incidencias de clientes.",
+        "Uso de herramientas CRM para seguimiento de actividad y reporte de KPIs comerciales."
+      ],
+      "seguros_en": [
+        "Comprehensive management of client portfolio and operational support, ensuring high satisfaction rates (NPS).",
+        "Optimization of administrative contracting processes, reducing response times by 60%.",
+        "Coordination with internal departments for the agile resolution of customer incidents.",
+        "Use of CRM tools for monitoring activity and reporting commercial KPIs."
+      ],
+      "banco": [
+        "Negociación directa con clientes corporativos y PYMES para la estructuración de productos a medida.",
+        "Análisis de viabilidad comercial y cierre de acuerdos financieros de alto valor.",
+        "Seguimiento de objetivos comerciales mensuales y gestión de relaciones a largo plazo.",
+        "Asesoramiento personalizado a empresas sobre productos de inversión y financiación."
+      ],
+      "banco_en": [
+        "Direct negotiation with corporate clients and SMEs for the structuring of tailor-made products.",
+        "Commercial feasibility analysis and closing of high-value financial agreements.",
+        "Monitoring of monthly commercial objectives and management of long-term relationships.",
+        "Personalized advice to companies on investment and financing products."
+      ]
     }
   },
   "user_detection": {
     "recruiter_patterns": [
-      "empresa", "puesto", "requisitos", "experiencia en", "conocimientos de",
-      "buscamos", "perfil", "candidato", "entrevista", "proceso de selección",
-      "salario", "disponibilidad", "incorporación", "equipo", "proyecto"
+      "empresa",
+      "puesto",
+      "requisitos",
+      "experiencia en",
+      "conocimientos de",
+      "buscamos",
+      "perfil",
+      "candidato",
+      "entrevista",
+      "proceso de selección",
+      "salario",
+      "disponibilidad",
+      "incorporación",
+      "equipo",
+      "proyecto",
+      "search",
+      "recruiter",
+      "hiring",
+      "vacancy"
     ],
     "casual_patterns": [
-      "hola", "qué tal", "cuéntame", "interesante", "impresionante",
-      "cómo", "por qué", "curiosidad", "me gusta", "genial"
+      "hola",
+      "qué tal",
+      "cuéntame",
+      "interesante",
+      "impresionante",
+      "cómo",
+      "por qué",
+      "curiosidad",
+      "me gusta",
+      "genial",
+      "hello",
+      "hi",
+      "how",
+      "why",
+      "curious",
+      "cool"
     ],
     "technical_patterns": [
-      "power bi", "sql", "python", "r", "datos", "análisis", "dashboard",
-      "kpi", "base de datos", "automatización", "ia", "machine learning"
+      "power bi",
+      "sql",
+      "python",
+      "r",
+      "datos",
+      "análisis",
+      "dashboard",
+      "kpi",
+      "base de datos",
+      "automatización",
+      "ia",
+      "machine learning",
+      "react",
+      "supabase",
+      "etl",
+      "agile",
+      "scrum",
+      "llm",
+      "rag",
+      "data analyst",
+      "developer",
+      "sales",
+      "operations",
+      "crm",
+      "real estate",
+      "fintech",
+      "strategy"
     ]
   }
 }

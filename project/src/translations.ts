@@ -9,15 +9,15 @@ export const translations = {
     },
     hero: {
       title: 'Analista de Datos | Economista | BI & Big Data',
-      tagline: 'Transformo datos en decisiones estratégicas',
-      downloadCV: 'Descargar CV',
+      tagline: 'El puente entre los Datos de Negocio y las Decisiones Estratégicas',
+      downloadCV: 'Ver Dossier',
     },
     about: {
       title: 'Sobre mí',
       description:
-        'Analista de Datos y Negocio con base financiera y experiencia en banca y seguros. Especializado en estructurar información compleja, mejorar la calidad del dato y elaborar reportes ejecutivos para comités. Combino Business Intelligence, análisis financiero y automatización con una visión estratégica orientada a la toma de decisiones.',
+        'En un mundo de especialistas, yo elijo ser el puente. Como Economista, entiendo el ROI y la estrategia. Como Analista, encuentro la verdad en los datos. Y como Builder, diseño sistemas agénticos mediante Spec Driven Development (SDD) para solucionar los problemas que encuentro.',
       education:
-        'Actualmente curso un MBA en EUDE Business School, complementando mi Máster completado en Business Intelligence y Big Data Analytics. Mi experiencia práctica con Power BI, SQL, R y procesos reproducibles para diagnóstico, integración y limpieza de datos me permite transformar datos complejos en insights accionables para la alta dirección.',
+        'Formado con un MBA y un Máster en Business Intelligence, mi enfoque es la eficiencia radical. Combino la visión de negocio con capacidades técnicas avanzadas (Python, SQL, React) y orquestación de IA (MCP, Workflows) para crear soluciones que no solo automatizan, sino que transforman resultados.',
     },
     experience: {
       title: 'Experiencia Profesional',
@@ -82,35 +82,56 @@ export const translations = {
       decline: 'Rechazar',
     },
     certificaciones: {
-  title: "Formación Académica y Certificaciones",
-  items: [
-    {
-      titulo: "Licenciatura en Economía",
-      institucion: "Universidad Católica Andrés Bello (UCAB)",
-      fecha: "2018 – 2023",
-      detalle: "Formación sólida en economía con enfoque en análisis cuantitativo, finanzas y políticas públicas."
+      title: "Formación Académica y Certificaciones",
+      items: [
+        {
+          titulo: "Licenciatura en Economía",
+          institucion: "Universidad Católica Andrés Bello (UCAB)",
+          fecha: "2018 – 2023",
+          detalle: "Formación sólida en economía con enfoque en análisis cuantitativo, finanzas y políticas públicas."
+        },
+        {
+          titulo: "Máster en Business Intelligence y Big Data",
+          institucion: "EUDE Business School, España",
+          fecha: "2024 – 2025 (en espera de graduación)",
+          detalle: "Especialización en analítica avanzada, inteligencia de negocio, big data y toma de decisiones empresariales."
+        },
+        {
+          titulo: "Ingeniería Informática (5 semestres)",
+          institucion: "Universidad Católica Andrés Bello (UCAB)",
+          fecha: "2015 – 2018",
+          detalle: "Fundamentos de programación, estructuras de datos y pensamiento lógico aplicados a la analítica."
+        },
+        {
+          titulo: "Certificaciones Complementarias",
+          institucion: "Formación en línea / Cursos especializados",
+          fecha: "Diversos años",
+          detalle: "Power BI, SQL, Python, Excel avanzado, Google Data Studio y herramientas de análisis de datos."
+        }
+      ]
     },
-    {
-      titulo: "Máster en Business Intelligence y Big Data",
-      institucion: "EUDE Business School, España",
-      fecha: "2024 – 2025 (en espera de graduación)",
-      detalle: "Especialización en analítica avanzada, inteligencia de negocio, big data y toma de decisiones empresariales."
-    },
-    {
-      titulo: "Ingeniería Informática (5 semestres)",
-      institucion: "Universidad Católica Andrés Bello (UCAB)",
-      fecha: "2015 – 2018",
-      detalle: "Fundamentos de programación, estructuras de datos y pensamiento lógico aplicados a la analítica."
-    },
-    {
-      titulo: "Certificaciones Complementarias",
-      institucion: "Formación en línea / Cursos especializados",
-      fecha: "Diversos años",
-      detalle: "Power BI, SQL, Python, Excel avanzado, Google Data Studio y herramientas de análisis de datos."
+    blog: {
+      title: 'Artículos y Casos de Estudio',
+      subtitle: 'Comparto mi experiencia práctica en análisis de datos, BI y automatización',
+      readOnLinkedin: 'Leer en LinkedIn',
+      comingSoon: 'Próximamente',
+      inDevelopment: 'En desarrollo',
+      readTime: 'lectura',
+      noPosts: 'No hay artículos publicados aún.',
+      tabs: {
+        articles: 'Artículos',
+        analysis: 'Análisis de Mercado'
+      },
+      analysis: {
+        title: 'Visión de Mercado',
+        subtitle: 'Seguimiento en tiempo real de los principales índices y activos financieros.'
+      },
+      cta: {
+        title: '¿Te interesa mi contenido técnico?',
+        subtitle: 'Sígueme en LinkedIn para recibir mis artículos sobre análisis de datos y BI',
+        button: 'Seguir en LinkedIn'
+      }
     }
-  ]
-},
-
   },
 
   en: {
@@ -123,15 +144,15 @@ export const translations = {
     },
     hero: {
       title: 'Data Analyst | Economist | BI & Big Data',
-      tagline: 'Turning data into strategic decisions',
-      downloadCV: 'Download CV',
+      tagline: 'The Bridge between Business Data and Strategic Decisions',
+      downloadCV: 'View Dossier',
     },
     about: {
       title: 'About Me',
       description:
-        'Data and Business Analyst with financial background and experience in banking and insurance. Specialized in structuring complex information, improving data quality, and developing executive reports for committees. I combine Business Intelligence, financial analysis, and automation with a strategic vision focused on decision-making.',
+        'In a world of specialists, I choose to be the bridge. As an Economist, I understand ROI and strategy. As an Analyst, I find the truth in data. And as a Builder, I design agentic systems through Spec Driven Development (SDD) to solve the problems I find.',
       education:
-        "Currently pursuing an MBA at EUDE Business School, complementing my completed Master's in Business Intelligence and Big Data Analytics. My hands-on experience with Power BI, SQL, R, and reproducible processes for diagnosis, integration, and data cleansing allows me to transform complex data into actionable insights for senior management.",
+        'Equipped with an MBA and a Master in Business Intelligence, my focus is radical efficiency. I combine business vision with advanced technical capabilities (Python, SQL, React) and AI orchestration (MCP, Workflows) to create solutions that don\'t just automate, but transform results.',
     },
     experience: {
       title: 'Professional Experience',
@@ -196,35 +217,56 @@ export const translations = {
       decline: 'Decline',
     },
     certificaciones: {
-  title: "Academic Background and Certifications",
-  items: [
-    {
-      titulo: "Bachelor's Degree in Economics",
-      institucion: "Universidad Católica Andrés Bello (UCAB)",
-      fecha: "2018 – 2023",
-      detalle: "Solid training in economics with a focus on quantitative analysis, finance, and public policy."
+      title: "Academic Background and Certifications",
+      items: [
+        {
+          titulo: "Bachelor's Degree in Economics",
+          institucion: "Universidad Católica Andrés Bello (UCAB)",
+          fecha: "2018 – 2023",
+          detalle: "Solid training in economics with a focus on quantitative analysis, finance, and public policy."
+        },
+        {
+          titulo: "Master’s in Business Intelligence and Big Data",
+          institucion: "EUDE Business School, Spain",
+          fecha: "2024 – 2025 (expected graduation)",
+          detalle: "Specialization in advanced analytics, business intelligence, big data, and strategic decision-making."
+        },
+        {
+          titulo: "Computer Engineering (5 semesters)",
+          institucion: "Universidad Católica Andrés Bello (UCAB) ",
+          fecha: "2015 – 2018",
+          detalle: "Programming fundamentals, data structures, and logical thinking applied to analytics."
+        },
+        {
+          titulo: "Additional Certifications",
+          institucion: "Online learning / Specialized courses",
+          fecha: "Various years",
+          detalle: "Power BI, SQL, Python, Advanced Excel, Google Data Studio, and data analysis tools."
+        }
+      ]
     },
-    {
-      titulo: "Master’s in Business Intelligence and Big Data",
-      institucion: "EUDE Business School, Spain",
-      fecha: "2024 – 2025 (expected graduation)",
-      detalle: "Specialization in advanced analytics, business intelligence, big data, and strategic decision-making."
-    },
-    {
-      titulo: "Computer Engineering (5 semesters)",
-      institucion: "Universidad Católica Andrés Bello (UCAB) ",
-      fecha: "2015 – 2018",
-      detalle: "Programming fundamentals, data structures, and logical thinking applied to analytics."
-    },
-    {
-      titulo: "Additional Certifications",
-      institucion: "Online learning / Specialized courses",
-      fecha: "Various years",
-      detalle: "Power BI, SQL, Python, Advanced Excel, Google Data Studio, and data analysis tools."
+    blog: {
+      title: 'Articles and Case Studies',
+      subtitle: 'Sharing my practical experience in data analysis, BI, and automation',
+      readOnLinkedin: 'Read on LinkedIn',
+      comingSoon: 'Coming Soon',
+      inDevelopment: 'In Development',
+      readTime: 'read',
+      noPosts: 'No articles published yet.',
+      tabs: {
+        articles: 'Articles',
+        analysis: 'Market Analysis'
+      },
+      analysis: {
+        title: 'Market Overview',
+        subtitle: 'Real-time tracking of major indices and financial assets.'
+      },
+      cta: {
+        title: 'Interested in my technical content?',
+        subtitle: 'Follow me on LinkedIn to receive my articles on data analysis and BI',
+        button: 'Follow on LinkedIn'
+      }
     }
-  ]
-},
-
   },
 };
 export type Language = 'es' | 'en';
